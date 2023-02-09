@@ -8,6 +8,7 @@ public class ContactBookView {
     
     private ContactBookController controller;
     private Scanner input;
+    private boolean show;
     
     public void setController(ContactBookController controller) {
         this.controller = controller;
@@ -15,7 +16,7 @@ public class ContactBookView {
     }
 
     public void showMenu() {
-        var show = true;
+        show = true;
         while (show) {
             try {
                 System.out.println("""
@@ -47,7 +48,7 @@ public class ContactBookView {
                         showContact();
                         break;
                     case "0":
-                        show = false;
+                        closeApp();
                         break;
                     default:
                         throw new IllegalArgumentException("Opcion no válida");
@@ -58,6 +59,10 @@ public class ContactBookView {
             }
         }
         System.out.println("Saliendo del programa...");
+    }
+
+    private void closeApp() {
+        controller.closeApp();
     }
 
     private void getContacts() {
@@ -155,5 +160,9 @@ public class ContactBookView {
     private void waitEnter() {
         System.out.println("\n Presione Enter para continuar.");
         input.nextLine();
+    }
+
+    public void stopMenu() {
+        show = false;
     }
 }

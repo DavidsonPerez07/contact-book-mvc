@@ -2,6 +2,7 @@ package com.davidsonperez.contactbook.controller;
 
 import java.util.List;
 
+import com.davidsonperez.contactbook.model.ConnectionDB;
 import com.davidsonperez.contactbook.model.ContactBookModel;
 import com.davidsonperez.contactbook.model.entity.Contact;
 import com.davidsonperez.contactbook.view.ContactBookView;
@@ -18,6 +19,7 @@ public class ContactBookController {
     }
 
     public void initApp() {
+        ConnectionDB.createTables();
         view.showMenu();
     }
 
@@ -79,5 +81,10 @@ public class ContactBookController {
             }
         }
         return contact;
+    }
+
+    public void closeApp() {
+        ConnectionDB.closeConnection();
+        view.stopMenu();
     }
 }
