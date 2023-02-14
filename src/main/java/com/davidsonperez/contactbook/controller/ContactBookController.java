@@ -41,24 +41,13 @@ public class ContactBookController {
         }
         return exists;
     }
+    
     public boolean verifyExistContact(String phoneNumber) {
-        var contacts = model.getContacts();
-        var exists = false;
-        for (int i = 0; i < contacts.size(); i++) {
-            if (contacts.get(i).getPhoneNumber().equals(phoneNumber)) {
-                exists = true;
-            }
-        }
-        return exists;
+        return(model.verifyExistContact(phoneNumber));
     }
 
     public void deleteContact(String phoneNumber) {
-        var contacts = model.getContacts();
-        for (int i = 0; i < contacts.size(); i++) {
-            if (contacts.get(i).getPhoneNumber().equals(phoneNumber)) {
-                contacts.remove(i);
-            }
-        }
+        model.deleteContact(phoneNumber);
     }
 
     public void modifyContact(String phoneNumber, String address, String newPhoneNumber, String webSite) {

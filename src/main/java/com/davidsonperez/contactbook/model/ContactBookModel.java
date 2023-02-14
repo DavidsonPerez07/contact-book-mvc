@@ -16,7 +16,7 @@ public class ContactBookModel {
             var stmt = conn.createStatement();
             var rset = stmt.executeQuery("""
                     SELECT phone_number, first_name, last_name, address, company_name, city, web_site
-                    FROM Contact
+                    FROM contact
                     ORDER BY first_name, last_name
                     """);
             while (rset.next()) {
@@ -60,5 +60,29 @@ public class ContactBookModel {
         } catch (SQLException e) {
             System.err.println("Error addContact(): " + e.getMessage());
         }
+    }
+
+    public void deleteContact(String phoneNumber) {
+        try {
+            var conn = ConnectionDB.getConnection();
+            String query = "DELETE FROM contact WHERE phone_number = ?";
+            var stmt = conn.prepareStatement(query);
+            stmt.setString(1, phoneNumber);
+            stmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.err.println("Error deleteContact(): " + e.getMessage());
+        } 
+    }
+
+    public boolean verifyExistContact(String phoneNumber) {
+        var contacts = getContacts();
+        var exists = false;
+        for (int i = 0; i < contacts.size(); i++) {
+            if (contacts.get(i).getPhoneNumber().equals(phoneNumber)) {
+                exists = true;
+            }
+        }
+        return exists;
     }
 }
