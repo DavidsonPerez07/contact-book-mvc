@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class ConnectionDB {
 
-    private static final String DATABASE_URL = "jdbc:h2:file:./contact-book";
+    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/contactbook";
     private static final String DATABASE_USER = "root";
-    private static final String DATABASE_PASSWORD = "Admin1254$%";
+    private static final String DATABASE_PASSWORD = "Trosquielpro07";
 
     private static Connection conn = null;
 
