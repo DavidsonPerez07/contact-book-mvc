@@ -84,7 +84,7 @@ public class ContactBookView {
         var name = input.nextLine();
         System.out.println("Ingrese el apellido: ");
         var lastName = input.nextLine();
-        var exists = controller.otherVerify(name, lastName);
+        var exists = controller.verifyExistContact(name, lastName);
         if (exists == true) {
             System.out.println("El contacto ya existe");
             waitEnter();
@@ -111,7 +111,7 @@ public class ContactBookView {
     private void deleteContact() {
         System.out.println("Ingrese el número telefónico del contacto a eliminar: ");
         var phoneNumber = input.nextLine();
-        var exists = controller.verifyExistContact(phoneNumber);
+        var exists = controller.searchContact(phoneNumber);
         if (exists == true) {
             controller.deleteContact(phoneNumber);
             System.out.println("Contacto eliminado exitosamente!");
@@ -125,15 +125,15 @@ public class ContactBookView {
     private void modifyContact() {
         System.out.println("Ingrese el número telefónico del contacto a modificar: ");
         var phoneNumber = input.nextLine();
-        var exists = controller.verifyExistContact(phoneNumber);
+        var exists = controller.searchContact(phoneNumber);
         if (exists == true) {
             System.out.println("Ingrese la nueva dirección: ");
-            var address = input.nextLine();
+            var newAddress = input.nextLine();
             System.out.println("Ingrese el nuevo número de teléfono: ");
             var newPhoneNumber = input.nextLine();
             System.out.println("Ingrese la nueva página web (opcional): ");
-            var webSite = input.nextLine();
-            controller.modifyContact(phoneNumber, address, newPhoneNumber, webSite);
+            var newWebSite = input.nextLine();
+            controller.modifyContact(phoneNumber, newAddress, newPhoneNumber, newWebSite);
             System.out.println("Contacto modificado exitosamente!");
         }
         else {
@@ -146,7 +146,7 @@ public class ContactBookView {
         System.out.println("Ingrese el número telefónico del contacto a consultar: ");
         var phoneNumber = input.nextLine();
         var contact = "";
-        var exists = controller.verifyExistContact(phoneNumber);
+        var exists = controller.searchContact(phoneNumber);
         if (exists == true) {
             contact = controller.showContact(phoneNumber);
             System.out.println(contact);

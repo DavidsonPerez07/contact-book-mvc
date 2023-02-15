@@ -30,46 +30,25 @@ public class ContactBookController {
     public void addContact(String name, String lastName, String address, String phoneNumber, String companyName, String city, String webSite) {
         model.addContact(new Contact(name, lastName, address, phoneNumber, companyName, city, webSite));
     }
-
-    public boolean otherVerify(String name, String lastName) {
-        var contacts = model.getContacts();
-        var exists = false;
-        for (int i = 0; i < contacts.size(); i++) {
-            if (contacts.get(i).getName().equals(name) && contacts.get(i).getLastName().equals(lastName)) {
-                exists = true;
-            }
-        }
-        return exists;
-    }
     
-    public boolean verifyExistContact(String phoneNumber) {
-        return(model.verifyExistContact(phoneNumber));
+    public boolean searchContact(String phoneNumber) {
+        return(model.searchContact(phoneNumber));
+    }
+
+    public boolean verifyExistContact(String name, String lastName) {
+        return(model.verifyExistContact(name, lastName));
     }
 
     public void deleteContact(String phoneNumber) {
         model.deleteContact(phoneNumber);
     }
 
-    public void modifyContact(String phoneNumber, String address, String newPhoneNumber, String webSite) {
-        var contacts = model.getContacts();
-        for (int i = 0; i < contacts.size(); i++) {
-            if (contacts.get(i).getPhoneNumber().equals(phoneNumber)) {
-                contacts.get(i).setAddress(address);
-                contacts.get(i).setPhoneNumber(newPhoneNumber);
-                contacts.get(i).setWebSite(webSite);
-            }
-        }
+    public void modifyContact(String phoneNumber, String newAddress, String newPhoneNumber, String newWebSite) {
+        model.modifyContact(phoneNumber, newAddress, newPhoneNumber, newWebSite);
     }
 
     public String showContact(String phoneNumber) {
-        var contacts = model.getContacts();
-        var contact = "";
-        for (int i = 0; i < contacts.size(); i++) {
-            if (contacts.get(i).getPhoneNumber().equals(phoneNumber)) {
-                contact = contacts.get(i).toString();
-            }
-        }
-        return contact;
+        return model.showContact(phoneNumber);
     }
 
     public void closeApp() {
