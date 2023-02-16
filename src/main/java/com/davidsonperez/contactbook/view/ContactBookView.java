@@ -85,7 +85,7 @@ public class ContactBookView {
         System.out.println("Ingrese el apellido: ");
         var lastName = input.nextLine();
         var exists = controller.verifyExistContact(name, lastName);
-        if (exists == true) {
+        if (exists) {
             System.out.println("El contacto ya existe");
             waitEnter();
         }
@@ -112,7 +112,7 @@ public class ContactBookView {
         System.out.println("Ingrese el número telefónico del contacto a eliminar: ");
         var phoneNumber = input.nextLine();
         var exists = controller.searchContact(phoneNumber);
-        if (exists == true) {
+        if (exists) {
             controller.deleteContact(phoneNumber);
             System.out.println("Contacto eliminado exitosamente!");
         }
@@ -126,7 +126,7 @@ public class ContactBookView {
         System.out.println("Ingrese el número telefónico del contacto a modificar: ");
         var phoneNumber = input.nextLine();
         var exists = controller.searchContact(phoneNumber);
-        if (exists == true) {
+        if (exists) {
             System.out.println("Ingrese la nueva dirección: ");
             var newAddress = input.nextLine();
             System.out.println("Ingrese el nuevo número de teléfono: ");
@@ -147,7 +147,7 @@ public class ContactBookView {
         var phoneNumber = input.nextLine();
         var contact = "";
         var exists = controller.searchContact(phoneNumber);
-        if (exists == true) {
+        if (exists) {
             contact = controller.showContact(phoneNumber);
             System.out.println(contact);
         }

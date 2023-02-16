@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 public class ConnectionDB {
 
+    private static final String DATABASE_URL_H2 = "jdbc:h2:./contactbook";
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/contactbook";
     private static final String DATABASE_USER = "root";
     private static final String DATABASE_PASSWORD = "Trosquielpro07";

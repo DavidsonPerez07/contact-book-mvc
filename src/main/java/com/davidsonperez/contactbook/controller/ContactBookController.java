@@ -28,15 +28,16 @@ public class ContactBookController {
     }
 
     public void addContact(String name, String lastName, String address, String phoneNumber, String companyName, String city, String webSite) {
-        model.addContact(new Contact(name, lastName, address, phoneNumber, companyName, city, webSite));
+        var contact = new Contact(name, lastName, address, phoneNumber, companyName, city, webSite);
+        model.addContact(contact);
     }
     
     public boolean searchContact(String phoneNumber) {
-        return(model.searchContact(phoneNumber));
+        return model.verifyExistContact(phoneNumber);
     }
 
     public boolean verifyExistContact(String name, String lastName) {
-        return(model.verifyExistContact(name, lastName));
+        return model.verifyExistContact(name, lastName);
     }
 
     public void deleteContact(String phoneNumber) {
@@ -44,11 +45,23 @@ public class ContactBookController {
     }
 
     public void modifyContact(String phoneNumber, String newAddress, String newPhoneNumber, String newWebSite) {
-        model.modifyContact(phoneNumber, newAddress, newPhoneNumber, newWebSite);
+        if (phoneNumber == null || phoneNumber.isEmpty()) {
+            throw new IllegalArgumentException("El número de teléfono no debe estar vacío");
+        }
+        var contact = model.getContact(phoneNumber);
+        if(contact == null) {
+            throw new RuntimeException("No existe un contacto con el número telefónico dado");
+        }
+
+        contact.setAddress(newAddress);
+        contact.setPhoneNumber(newPhoneNumber);
+        contact.setWebSite(newWebSite);
+
+        model.modifyContact(phoneNumber, contact);
     }
 
     public String showContact(String phoneNumber) {
-        return model.showContact(phoneNumber);
+        return model.getContact(phoneNumber).toString();
     }
 
     public void closeApp() {
